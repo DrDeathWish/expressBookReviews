@@ -93,58 +93,7 @@ regd_users.post("/login", (req,res) => {
     return res.status(200).json({message: "Review deleted successfully"});
   });
 
-  //getting list of books async
-  public_users.get("/server/asynbooks", async function (req,res) {
-    try {
-      let response = await axios.get("http://localhost:5005/");
-      console.log(response.data);
-      return res.status(200).json(response.data);
-      
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({message: "Error getting book list"});
-    }
-  });
-  //based on isbn async
-  public_users.get("/server/asynbooks/isbn/:isbn", function (req,res) {
-    let {isbn} = req.params;
-    axios.get(`http://localhost:5005/isbn/${isbn}`)
-    .then(function(response){
-      console.log(response.data);
-      return res.status(200).json(response.data);
-    })
-    .catch(function(error){
-        console.log(error);
-        return res.status(500).json({message: "Error while fetching book details."})
-    })
-  });
-  //based on author async
-  public_users.get("/server/asynbooks/author/:author", function (req,res) {
-    let {author} = req.params;
-    axios.get(`http://localhost:5005/author/${author}`)
-    .then(function(response){
-      console.log(response.data);
-      return res.status(200).json(response.data);
-    })
-    .catch(function(error){
-        console.log(error);
-        return res.status(500).json({message: "Error while fetching book details."})
-    })
-  });
-  
-  //based on author title
-  public_users.get("/server/asynbooks/title/:title", function (req,res) {
-    let {title} = req.params;
-    axios.get(`http://localhost:5005/title/${title}`)
-    .then(function(response){
-      console.log(response.data);
-      return res.status(200).json(response.data);
-    })
-    .catch(function(error){
-        console.log(error);
-        return res.status(500).json({message: "Error while fetching book details."})
-    })
-  });
+ 
 
 module.exports.authenticated = regd_users;
 module.exports.isValid = isValid;
